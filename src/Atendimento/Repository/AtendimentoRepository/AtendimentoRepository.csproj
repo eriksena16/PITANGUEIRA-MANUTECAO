@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>Pitangueira.Repository</AssemblyName>
-    <RootNamespace>Pitangueira.Repository</RootNamespace>
+    <AssemblyName>Pitangueira.Repository.AtendimentoRepository</AssemblyName>
+    <RootNamespace>Pitangueira.Atendimento.Repository.AtendimentoRepository</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

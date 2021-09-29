@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Pitangueira.Model.Entities;
 
-namespace Pitangueira.Repository
+namespace Pitangueira.Repository.AtendimentoRepository
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -10,5 +10,9 @@ namespace Pitangueira.Repository
             : base(options)
         {
         }
+
+        public DbSet<Atendimento> Atendimento { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<ApplicationUser> Tecnico { get; set; }
     }
 }

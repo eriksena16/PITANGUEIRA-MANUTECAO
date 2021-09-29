@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>AtendimentoLocator</AssemblyName>
-    <RootNamespace>AtendimentoLocator</RootNamespace>
+    <AssemblyName>Pitangueira.Infrastructure.AtendimentoLocator</AssemblyName>
+    <RootNamespace>Pitangueira.Atendimento.Infrastructure.AtendimentoLocator</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!--<ProjectReference Include="..\..\..\Contract\Service\PatrimonyContract\PatrimonyContract.csproj" />
-    <ProjectReference Include="..\..\Service\PatrimonyService\PatrimonyService.csproj" />-->
+    <ProjectReference Include="..\..\..\Contract\Service\AtendimentoContract\AtendimentoContract.csproj" />
+    <ProjectReference Include="..\..\Service\AtendimentoServices\AtendimentoServices.csproj" />
   </ItemGroup>
 
 </Project>
