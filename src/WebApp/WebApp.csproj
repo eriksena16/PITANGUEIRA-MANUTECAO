@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Shared\_login.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Shared\_Login.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.9" />
@@ -15,8 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Atendimento\Infrastructure\AtendimentoLocator\AtendimentoLocator.csproj" />
     <ProjectReference Include="..\Atendimento\Repository\AtendimentoRepository\AtendimentoRepository.csproj" />
+    <ProjectReference Include="..\Contract\Service\AtendimentoContract\AtendimentoContract.csproj" />
     <ProjectReference Include="..\Contract\Service\GatewayContract\GatewayContract.csproj" />
+    <ProjectReference Include="..\Gateway\Infrastructure\GatewayLocator\GatewayLocator.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,6 +7,6 @@ namespace Pitangueira.Model.Entities.Enums
     public enum AtendimentoType
     {
         Incidente = 1,
-        Requicicao = 2
+        Requisição = 2
     }
 }

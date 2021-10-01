@@ -6,4 +6,8 @@
     <RootNamespace>Pitangueira.Contract.AtendimentoContract</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Model\Entities\Entities.csproj" />
+  </ItemGroup>
+
 </Project>

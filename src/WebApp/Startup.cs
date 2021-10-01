@@ -1,11 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pitangueira.Gateway.Infrastructure.GatewayLocator;
+using Pitangueira.Infrastructure.AtendimentoLocator;
 using Pitangueira.Model.Entities;
 using Pitangueira.Repository.AtendimentoRepository;
+using System.Collections.Generic;
 
 namespace WebApp
 {
@@ -25,6 +30,9 @@ namespace WebApp
                 options.UseSqlServer(
                     Configuration.GetConnectionString("PitangaContext")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.ConfigureAtendimentoService();
+            services.ConfigureGatewayService();
+            services.AddHttpContextAccessor();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -35,6 +43,15 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var ptBR = new CultureInfo("pt-br");
+            var localizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(ptBR),
+                SupportedCultures = new List<CultureInfo> { ptBR },
+                SupportedUICultures = new List<CultureInfo> { ptBR }
+
+            };
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,7 +75,7 @@ namespace WebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Atendimentos}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

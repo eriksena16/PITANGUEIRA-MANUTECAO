@@ -44,10 +44,12 @@ namespace WebApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Nome do usuário")]
             public string Username { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Senha")]
             public string Password { get; set; }
 
             [Display(Name = "Remember me?")]

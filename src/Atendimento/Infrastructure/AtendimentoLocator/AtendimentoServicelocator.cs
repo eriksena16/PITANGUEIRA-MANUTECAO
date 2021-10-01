@@ -9,7 +9,7 @@ namespace Pitangueira.Infrastructure.AtendimentoLocator
         public static void ConfigureAtendimentoService(this IServiceCollection services)
         {
             services.AddScoped<IAtendimentoService, AtendimentoService>();
-            //services.AddScoped<IClassificacaoDeAtivosService, ClassificacaoDeAtivosService>();
+            services.AddScoped<IClienteService, ClienteService>();
             //services.AddScoped<IModeloDeEquipamentoService, ModeloDeEquipamentoService>();
             //services.AddScoped<ISetorService, SetorService>();
             //services.AddScoped<IFabricanteService, FabricanteService>();

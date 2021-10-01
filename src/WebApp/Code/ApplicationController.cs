@@ -2,7 +2,7 @@
 using Pitangueira.Contract.GatewayContract;
 
 
-namespace SGP.Code
+namespace Pitangueira.Code
 {
     public class ApplicationController : Controller
     {
