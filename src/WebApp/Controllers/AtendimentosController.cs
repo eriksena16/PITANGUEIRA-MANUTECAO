@@ -15,9 +15,9 @@ namespace WebApp.Controllers
 {
     public class AtendimentosController : ApplicationController
     {
-        private readonly ApplicationDbContext _context;
+        private readonly PitangaDbContext _context;
 
-        public AtendimentosController(ApplicationDbContext context)
+        public AtendimentosController(PitangaDbContext context)
         {
             _context = context;
         }
@@ -64,14 +64,14 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                atendimento.UserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                //atendimento.UsuarioId = this.Usuario.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 atendimento = await this.GatewayServiceProvider.Get<IAtendimentoService>().Create(atendimento);
 
                 return RedirectToAction(nameof(Index));
             }
             DropdownListCliente(atendimento.ClienteId);
-            //ViewData["UserId"] = new SelectList(_context.Tecnico, "Id", "Id", atendimento.UserId);
+            //ViewData["UsuarioId"] = new SelectList(_context.Tecnico, "Id", "Id", atendimento.UsuarioId);
             return View(atendimento);
         }
 
@@ -90,7 +90,7 @@ namespace WebApp.Controllers
                 return NotFound();
             }
             DropdownListCliente(atendimento.ClienteId);
-            ViewData["UserId"] = new SelectList(_context.Usuario, "Id", "Id", atendimento.UserId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", atendimento.UsuarioId);
             return View(atendimento);
         }
 
@@ -127,7 +127,7 @@ namespace WebApp.Controllers
             }
             DropdownListCliente(atendimento.ClienteId);
 
-            ViewData["UserId"] = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //ViewData["UsuarioId"] = this.Usuario.FindFirstValue(ClaimTypes.NameIdentifier);
             return View(atendimento);
         }
 

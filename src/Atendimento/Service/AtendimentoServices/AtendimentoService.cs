@@ -11,10 +11,10 @@ namespace Pitangueira.Service.AtendimentoServices
 {
     public class AtendimentoService : IAtendimentoService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly PitangaDbContext _context;
         private readonly IClienteService _cliente;
 
-        public AtendimentoService(ApplicationDbContext context, IClienteService cliente)
+        public AtendimentoService(PitangaDbContext context, IClienteService cliente)
         {
             _context = context;
             _cliente = cliente;
@@ -74,7 +74,7 @@ namespace Pitangueira.Service.AtendimentoServices
             try
             {
                 Atendimento atendimento = await _context.Atendimento
-                    .Include(c => c.User)
+                    .Include(c => c.Usuario)
                     .Include(c => c.Cliente)
                     .FirstOrDefaultAsync(a => a.Id == id);
 
@@ -99,7 +99,7 @@ namespace Pitangueira.Service.AtendimentoServices
             {
                 List<Atendimento> atendimentos = _context.Atendimento
                 .Include(c => c.Cliente)
-                .Include(c => c.User)
+                .Include(c => c.Usuario)
                 .OrderBy(c => c.DataExecucao)
                 .ToList();
 

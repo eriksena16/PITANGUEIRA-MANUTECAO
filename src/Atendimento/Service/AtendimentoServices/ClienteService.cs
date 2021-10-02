@@ -4,16 +4,15 @@ using Pitangueira.Repository.AtendimentoRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Pitangueira.Service.AtendimentoServices
 {
     public class ClienteService : IClienteService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly PitangaDbContext _context;
 
-        public ClienteService(ApplicationDbContext context)
+        public ClienteService(PitangaDbContext context)
         {
             _context = context;
         }

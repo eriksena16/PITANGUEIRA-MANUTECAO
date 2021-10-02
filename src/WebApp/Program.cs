@@ -30,7 +30,7 @@ namespace WebApp
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<ApplicationDbContext>();
+                    var context = services.GetRequiredService<PitangaDbContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)

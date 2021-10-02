@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Pitangueira.Service.AtendimentoServices
 {
-    public class TipoAtendimentoService
+    class UsuarioService
     {
-
     }
 }

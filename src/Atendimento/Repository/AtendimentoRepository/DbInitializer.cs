@@ -6,7 +6,7 @@ namespace Repository.AtendimentoRepository
 {
     public class DbInitializer
     {
-        public static void Initialize(ApplicationDbContext context)
+        public static void Initialize(PitangaDbContext context)
         {
             context.Database.EnsureCreated();
 
@@ -26,17 +26,17 @@ namespace Repository.AtendimentoRepository
             }
             context.SaveChanges();
 
-            var users = new ApplicationUser[]
-            {
-                new ApplicationUser{Name = "Gestor", UserName ="gestor", Email="gestor@pitanga.com", EmailConfirmed = true, PasswordHash = "Tacanha12@"},
-                new ApplicationUser{Name = "Tecnico", UserName ="tecnico", Email="tecnico@pitanga.com", EmailConfirmed = true, PasswordHash = "Tacanha12@"}
-            };
+            //var users = new Usuario[]
+            //{
+            //    new Usuario{Name = "Gestor", UsuarioName ="gestor", Email="gestor@pitanga.com", EmailConfirmed = true, PasswordHash = "Tacanha12@"},
+            //    new Usuario{Name = "Tecnico", UsuarioName ="tecnico", Email="tecnico@pitanga.com", EmailConfirmed = true, PasswordHash = "Tacanha12@"}
+            //};
 
-            foreach (var obj in users)
-            {
-                context.Usuario.Add(obj);
-            }
-            context.SaveChanges();
+            //foreach (var obj in users)
+            //{
+            //    context.Usuario.Add(obj);
+            //}
+            //context.SaveChanges();
 
 
         }

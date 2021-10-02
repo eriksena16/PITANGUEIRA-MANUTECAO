@@ -4,15 +4,15 @@ using Pitangueira.Model.Entities;
 
 namespace Pitangueira.Repository.AtendimentoRepository
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class PitangaDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public PitangaDbContext(DbContextOptions<PitangaDbContext> options)
             : base(options)
         {
         }
 
         public DbSet<Atendimento> Atendimento { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
-        public DbSet<ApplicationUser> Usuario { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
     }
 }

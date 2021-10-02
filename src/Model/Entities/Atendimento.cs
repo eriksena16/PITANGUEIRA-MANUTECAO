@@ -19,8 +19,8 @@ namespace Pitangueira.Model.Entities
         public Cliente Cliente { get; set; }
 
         [Display(Name = "Usuario")]
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public string UsuarioId { get; set; }
+        public Usuario Usuario { get; set; }
 
         [Display(Name = "Observação")]
         public string Observacao { get; set; }

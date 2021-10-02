@@ -26,18 +26,24 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddControllersWithViews();
+            services.AddDbContext<PitangaDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("PitangaContext")));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.ConfigureAtendimentoService();
             services.ConfigureGatewayService();
             services.AddHttpContextAccessor();
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAuthentication("CookieAuthentication")
+                 .AddCookie("CookieAuthentication", config =>
+                 {
+                     config.Cookie.Name = "ApplicationCookie";
+                     config.LoginPath = "/Autenticacao/Login";
+                 });
 
-            services.AddControllersWithViews();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,8 +81,8 @@ namespace WebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Atendimentos}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapRazorPages();
             });
         }
     }
