@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Pitangueira.Model.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 

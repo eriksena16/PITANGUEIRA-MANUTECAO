@@ -1,38 +1,38 @@
-﻿using Pitangueira.Contract.AtendimentoContract;
+﻿using Microsoft.EntityFrameworkCore;
+using Pitangueira.Contract.AtendimentoContract;
 using Pitangueira.Model.Entities;
 using Pitangueira.Repository.AtendimentoRepository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Pitangueira.Service.AtendimentoServices
 {
-    public class ClienteService : IClienteService
+    public class GenericService<T> : IGenericService<T> where T : GenericEntity, new()
     {
-        private readonly PitangaDbContext _context;
-
-        public ClienteService(PitangaDbContext context)
+        private readonly DbSet<T> entities;
+        public GenericService(PitangaDbContext context)
         {
-            _context = context;
+            entities = context.Set<T>();
         }
 
-        public async Task<Cliente> Create(Cliente obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Cliente> Delete(long? id)
+       virtual public Task<T> Create(T obj)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Cliente> DeleteConfirmed(long id)
+        public Task<T> Delete(long? id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Cliente> Details(long? id)
+        public Task<T> DeleteConfirmed(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> Details(long? id)
         {
             throw new NotImplementedException();
         }
@@ -42,17 +42,17 @@ namespace Pitangueira.Service.AtendimentoServices
             throw new NotImplementedException();
         }
 
-        public List<Cliente> GetAll()
-        {
-            return _context.Cliente.OrderBy(c=> c.Name).ToList();
-        }
-
-        public Task<Cliente> GetUpdate(long id)
+        public List<T> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Cliente> Update(long id, Cliente obj)
+        public Task<T> GetUpdate(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> Update(long id, T obj)
         {
             throw new NotImplementedException();
         }

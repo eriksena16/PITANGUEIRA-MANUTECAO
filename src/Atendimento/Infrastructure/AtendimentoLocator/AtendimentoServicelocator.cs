@@ -10,6 +10,7 @@ namespace Pitangueira.Infrastructure.AtendimentoLocator
         {
             services.AddScoped<IAtendimentoService, AtendimentoService>();
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
             //services.AddScoped<IModeloDeEquipamentoService, ModeloDeEquipamentoService>();
             //services.AddScoped<ISetorService, SetorService>();
             //services.AddScoped<IFabricanteService, FabricanteService>();

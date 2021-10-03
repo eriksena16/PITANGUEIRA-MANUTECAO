@@ -8,6 +8,8 @@
 
   <ItemGroup>
 
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.9" />
     
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />

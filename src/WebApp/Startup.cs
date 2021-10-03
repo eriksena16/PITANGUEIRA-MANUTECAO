@@ -1,16 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Pitangueira.Gateway.Infrastructure.GatewayLocator;
 using Pitangueira.Infrastructure.AtendimentoLocator;
-using Pitangueira.Model.Entities;
 using Pitangueira.Repository.AtendimentoRepository;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace WebApp
 {
@@ -27,6 +26,7 @@ namespace WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
             services.AddDbContext<PitangaDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("PitangaContext")));
@@ -34,7 +34,7 @@ namespace WebApp
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.ConfigureAtendimentoService();
             services.ConfigureGatewayService();
-            services.AddHttpContextAccessor();
+
 
             services.AddAuthentication("CookieAuthentication")
                  .AddCookie("CookieAuthentication", config =>
@@ -43,7 +43,7 @@ namespace WebApp
                      config.LoginPath = "/Autenticacao/Login";
                  });
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

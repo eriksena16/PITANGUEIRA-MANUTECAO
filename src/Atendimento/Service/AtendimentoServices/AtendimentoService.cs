@@ -20,24 +20,27 @@ namespace Pitangueira.Service.AtendimentoServices
             _cliente = cliente;
         }
 
-        public async Task<Atendimento> Create(Atendimento obj)
+        public async Task<Atendimento_> Create(Atendimento_ obj)
         {
             try
             {
+                obj.UsuarioId = 1;
+                obj.TipoAtendimentoId = 1;
                 _context.Add(obj);
 
                 await _context.SaveChangesAsync();
 
                 return obj;
+
             }
             catch (Exception e)
             {
 
-                throw new ArgumentException("Ops! algo de errado aconteceu " + e.Message);
+                throw new Exception(e.Message);
             }
         }
 
-        public async Task<Atendimento> Delete(long? id)
+        public async Task<Atendimento_> Delete(long? id)
         {
             try
             {
@@ -50,11 +53,11 @@ namespace Pitangueira.Service.AtendimentoServices
             }
         }
 
-        public async Task<Atendimento> DeleteConfirmed(long id)
+        public async Task<Atendimento_> DeleteConfirmed(long id)
         {
             try
             {
-                Atendimento atendimento = await _context.Atendimento.FindAsync(id);
+                Atendimento_ atendimento = await _context.Atendimento.FindAsync(id);
 
                 _context.Atendimento.Remove(atendimento);
 
@@ -69,11 +72,11 @@ namespace Pitangueira.Service.AtendimentoServices
             }
         }
 
-        public async Task<Atendimento> Details(long? id)
+        public async Task<Atendimento_> Details(long? id)
         {
             try
             {
-                Atendimento atendimento = await _context.Atendimento
+                Atendimento_ atendimento = await _context.Atendimento
                     .Include(c => c.Usuario)
                     .Include(c => c.Cliente)
                     .FirstOrDefaultAsync(a => a.Id == id);
@@ -92,12 +95,12 @@ namespace Pitangueira.Service.AtendimentoServices
             return await Task.FromResult(_context.Atendimento.Any(e => e.Id == id));
         }
 
-        public List<Atendimento> GetAll()
+        public List<Atendimento_> GetAll()
         {
 
             try
             {
-                List<Atendimento> atendimentos = _context.Atendimento
+                List<Atendimento_> atendimentos = _context.Atendimento
                 .Include(c => c.Cliente)
                 .Include(c => c.Usuario)
                 .OrderBy(c => c.DataExecucao)
@@ -112,13 +115,13 @@ namespace Pitangueira.Service.AtendimentoServices
             }
         }
 
-        public async Task<Atendimento> GetUpdate(long id)
+        public async Task<Atendimento_> GetUpdate(long id)
         {
 
 
             try
             {
-                Atendimento atendimento = await _context.Atendimento.FindAsync(id);
+                Atendimento_ atendimento = await _context.Atendimento.FindAsync(id);
 
                 return atendimento;
             }
@@ -129,7 +132,7 @@ namespace Pitangueira.Service.AtendimentoServices
             }
         }
 
-        public async Task<Atendimento> Update(long id, Atendimento obj)
+        public new async Task<Atendimento_> Update(long id, Atendimento_ obj)
         {
 
 

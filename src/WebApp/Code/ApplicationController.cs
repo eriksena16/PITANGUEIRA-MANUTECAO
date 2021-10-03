@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pitangueira.Contract.GatewayContract;
 
-
 namespace Pitangueira.Code
 {
     public class ApplicationController : Controller

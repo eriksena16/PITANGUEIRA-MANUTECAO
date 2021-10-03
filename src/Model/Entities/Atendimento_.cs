@@ -1,12 +1,13 @@
-﻿using Pitangueira.Model.Entities.Enums;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pitangueira.Model.Entities
 {
-    public class Atendimento: GenericEntity
+    [Table("Atendimento")]
+    public class Atendimento_ : GenericEntity
     {
-        [Display(Name ="Data de Execução")]
+        [Display(Name = "Data de Execução")]
         [DataType(DataType.Date)]
         public DateTime DataExecucao { get; set; }
 
@@ -19,7 +20,7 @@ namespace Pitangueira.Model.Entities
         public Cliente Cliente { get; set; }
 
         [Display(Name = "Usuario")]
-        public string UsuarioId { get; set; }
+        public long UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 
         [Display(Name = "Observação")]

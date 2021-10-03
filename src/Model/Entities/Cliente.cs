@@ -5,6 +5,6 @@ namespace Pitangueira.Model.Entities
     public class Cliente : Pessoa
     {
 
-        ICollection<Atendimento> Atendimentos { get; set; }
+        ICollection<Atendimento_> Atendimentos { get; set; }
     }
 }

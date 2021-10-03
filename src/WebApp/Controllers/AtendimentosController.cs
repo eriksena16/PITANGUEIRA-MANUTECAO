@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Pitangueira.Code;
+using Pitangueira.Contract.AtendimentoContract;
 using Pitangueira.Model.Entities;
 using Pitangueira.Repository.AtendimentoRepository;
-using System.Security.Claims;
-using Pitangueira.Contract.AtendimentoContract;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class AtendimentosController : ApplicationController
     {
         private readonly PitangaDbContext _context;
@@ -25,7 +25,7 @@ namespace WebApp.Controllers
         // GET: Atendimentos
         public async Task<IActionResult> Index()
         {
-            List<Atendimento> atendimentos =  this.GatewayServiceProvider.Get<IAtendimentoService>().GetAll();
+            List<Atendimento_> atendimentos =  this.GatewayServiceProvider.Get<IAtendimentoService>().GetAll();
 
             return View(atendimentos);
         }
@@ -38,7 +38,7 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            Atendimento atendimento = await this.GatewayServiceProvider.Get<IAtendimentoService>().Details(id);
+            Atendimento_ atendimento = await this.GatewayServiceProvider.Get<IAtendimentoService>().Details(id);
 
             if (atendimento == null)
             {
@@ -60,7 +60,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Atendimento atendimento)
+        public async Task<IActionResult> Create( Atendimento_ atendimento)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, Atendimento atendimento)
+        public async Task<IActionResult> Edit(long id, Atendimento_ atendimento)
         {
             if (id != atendimento.Id)
             {

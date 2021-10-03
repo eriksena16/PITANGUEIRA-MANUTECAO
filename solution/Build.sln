@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAplication", "WebAplicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AtendimentoRepository", "..\src\Atendimento\Repository\AtendimentoRepository\AtendimentoRepository.csproj", "{D04FD0CC-B92D-4565-BD96-638C9B684661}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Atendimento", "Atendimento", "{8674FD4E-C48F-4A66-ADD9-35D548EC0264}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModuloAtendimento", "ModuloAtendimento", "{8674FD4E-C48F-4A66-ADD9-35D548EC0264}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{6215ADBB-DCAB-4A0C-B803-8FDBE1140A2E}"
 EndProject
@@ -47,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{450C20C4-7B92-45B8-98A6-E76F3EF19D64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionSecurity", "..\src\Infrastructure\Security\ExtensionSecurity\ExtensionSecurity.csproj", "{081BD3C2-AD90-414E-995E-B26F277DDED8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtensionSecurity", "..\src\Infrastructure\Security\ExtensionSecurity\ExtensionSecurity.csproj", "{081BD3C2-AD90-414E-995E-B26F277DDED8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
