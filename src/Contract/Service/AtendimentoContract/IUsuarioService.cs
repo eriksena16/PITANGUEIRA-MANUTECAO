@@ -14,7 +14,7 @@ namespace Pitangueira.Contract.AtendimentoContract
         Task<Usuario> Update(long id, Usuario obj);
         Task<Usuario> Delete(long? id);
         Task<Usuario> DeleteConfirmed(long id);
-        Task<bool> Exists(long id);
         bool HasUsuario(UsuarioSalvarQuery obj);
+        Task<Usuario> Login(Login obj);
     }
 }

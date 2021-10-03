@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace WebApp.Controllers
 {
-    [Authorize]
+    
     public class AtendimentosController : ApplicationController
     {
         private readonly PitangaDbContext _context;
@@ -22,7 +22,7 @@ namespace WebApp.Controllers
             _context = context;
         }
 
-        // GET: Atendimentos
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             List<Atendimento_> atendimentos =  this.GatewayServiceProvider.Get<IAtendimentoService>().GetAll();
@@ -30,7 +30,6 @@ namespace WebApp.Controllers
             return View(atendimentos);
         }
 
-        // GET: Atendimentos/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -48,16 +47,18 @@ namespace WebApp.Controllers
             return View(atendimento);
         }
 
-        // GET: Atendimentos/Create
         public IActionResult Create()
         {
             DropdownListCliente();
             return View();
         }
 
-        // POST: Atendimentos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
+        public ActionResult Mensagens()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create( Atendimento_ atendimento)
@@ -75,7 +76,6 @@ namespace WebApp.Controllers
             return View(atendimento);
         }
 
-        // GET: Atendimentos/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -94,9 +94,7 @@ namespace WebApp.Controllers
             return View(atendimento);
         }
 
-        // POST: Atendimentos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, Atendimento_ atendimento)
@@ -131,7 +129,6 @@ namespace WebApp.Controllers
             return View(atendimento);
         }
 
-        // GET: Atendimentos/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -149,7 +146,6 @@ namespace WebApp.Controllers
             return View(atendimento);
         }
 
-        // POST: Atendimentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)

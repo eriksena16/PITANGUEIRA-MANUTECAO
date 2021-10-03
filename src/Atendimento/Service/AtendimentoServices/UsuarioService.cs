@@ -57,39 +57,44 @@ namespace Pitangueira.Service.AtendimentoServices
             
         }
 
-        public new Task<Usuario> Delete(long? id)
+        public  Task<Usuario> Delete(long? id)
         {
             throw new NotImplementedException();
         }
 
-        public new Task<Usuario> DeleteConfirmed(long id)
+        public Task<Usuario> DeleteConfirmed(long id)
         {
             throw new NotImplementedException();
         }
 
-        public new Task<Usuario> Details(long? id)
+        public Task<Usuario> Details(long? id)
         {
             throw new NotImplementedException();
         }
 
-        public new Task<bool> Exists(long id)
+        public Task<bool> Exists(long id)
         {
             throw new NotImplementedException();
         }
 
-        public new List<Usuario> GetAll()
+        public List<Usuario> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public new Task<Usuario> GetUpdate(long id)
+        public Task<Usuario> GetUpdate(long id)
         {
             throw new NotImplementedException();
         }
 
-        public new Task<Usuario> Update(long id, Usuario obj)
+        public Task<Usuario> Update(long id, Usuario obj)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Usuario> Login(Login obj)
+        {
+            return  _context.Usuario.FirstOrDefault(c => c.UserName == obj.Username);
         }
     }
 }
