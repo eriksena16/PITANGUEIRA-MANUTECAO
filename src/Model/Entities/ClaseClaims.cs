@@ -13,7 +13,9 @@ namespace Pitangueira.Model.Entities
             {
                 throw new ArgumentNullException(nameof(claimsPrincipal));
             }
-            return claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var userId = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return userId;
         }
 
         public static string GetUserName(this ClaimsPrincipal claimsPrincipal)

@@ -79,7 +79,17 @@ namespace Pitangueira.Service.AtendimentoServices
 
         public List<Usuario> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Usuario> usuarios = _context.Usuario.ToList();
+
+                return usuarios;
+            }
+            catch (Exception e)
+            {
+
+                throw new ArgumentException(e.Message);
+            }
         }
 
         public Task<Usuario> GetUpdate(long id)

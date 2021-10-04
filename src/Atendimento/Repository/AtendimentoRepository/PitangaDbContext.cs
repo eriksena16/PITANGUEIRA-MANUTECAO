@@ -14,5 +14,6 @@ namespace Pitangueira.Repository.AtendimentoRepository
         public DbSet<Atendimento_> Atendimento { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<TipoAtendimento> TipoAtendimento { get; set; }
     }
 }

@@ -12,20 +12,22 @@ using System.Threading.Tasks;
 
 namespace WebApp.Controllers
 {
-    
+    [Authorize]
     public class AtendimentosController : ApplicationController
     {
         private readonly PitangaDbContext _context;
 
+
         public AtendimentosController(PitangaDbContext context)
         {
             _context = context;
+
         }
 
-        [Authorize]
+
         public async Task<IActionResult> Index()
         {
-            List<Atendimento_> atendimentos =  this.GatewayServiceProvider.Get<IAtendimentoService>().GetAll();
+            List<Atendimento_> atendimentos = this.GatewayServiceProvider.Get<IAtendimentoService>().GetAll();
 
             return View(atendimentos);
         }
@@ -49,29 +51,39 @@ namespace WebApp.Controllers
 
         public IActionResult Create()
         {
+
             DropdownListCliente();
+            DropdownListTipoDeAtendimento();
             return View();
         }
 
-        [Authorize]
-        public ActionResult Mensagens()
-        {
-            return View();
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Atendimento_ atendimento)
+        public async Task<IActionResult> Create(Atendimento_ atendimento)
         {
             if (ModelState.IsValid)
             {
-                //atendimento.UsuarioId = this.Usuario.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userName = User.Identity.Name;
+
+                var usuarios = this.GatewayServiceProvider.Get<IAtendimentoService>().GetUsuario();
+
+                foreach (var obj in usuarios)
+                {
+                    if (userName == obj.UserName)
+                    {
+                        atendimento.UsuarioId = obj.Id;
+                    }
+                }
+
+               
 
                 atendimento = await this.GatewayServiceProvider.Get<IAtendimentoService>().Create(atendimento);
 
                 return RedirectToAction(nameof(Index));
             }
             DropdownListCliente(atendimento.ClienteId);
+            DropdownListTipoDeAtendimento(atendimento.TipoAtendimentoId);
             //ViewData["UsuarioId"] = new SelectList(_context.Tecnico, "Id", "Id", atendimento.UsuarioId);
             return View(atendimento);
         }
@@ -90,11 +102,12 @@ namespace WebApp.Controllers
                 return NotFound();
             }
             DropdownListCliente(atendimento.ClienteId);
+            DropdownListTipoDeAtendimento(atendimento.TipoAtendimentoId);
             ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", atendimento.UsuarioId);
             return View(atendimento);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, Atendimento_ atendimento)
@@ -108,7 +121,7 @@ namespace WebApp.Controllers
             {
                 try
                 {
-                     await this.GatewayServiceProvider.Get<IAtendimentoService>().Update(id, atendimento);
+                    await this.GatewayServiceProvider.Get<IAtendimentoService>().Update(id, atendimento);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,7 +137,7 @@ namespace WebApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
             DropdownListCliente(atendimento.ClienteId);
-
+            DropdownListTipoDeAtendimento(atendimento.TipoAtendimentoId);
             //ViewData["UsuarioId"] = this.Usuario.FindFirstValue(ClaimTypes.NameIdentifier);
             return View(atendimento);
         }
@@ -151,7 +164,7 @@ namespace WebApp.Controllers
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var atendimento = await this.GatewayServiceProvider.Get<IAtendimentoService>().DeleteConfirmed(id);
-            
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -165,6 +178,13 @@ namespace WebApp.Controllers
             var lista = this.GatewayServiceProvider.Get<IAtendimentoService>().DropdownListCliente();
 
             ViewBag.ClienteId = new SelectList(lista, "Id", "Name", listaCliente);
+        }
+
+        private void DropdownListTipoDeAtendimento(object tipoDeAtendimento = null)
+        {
+            var lista = this.GatewayServiceProvider.Get<IAtendimentoService>().DropdownListTipoDeAtendimento();
+
+            ViewBag.TipoAtendimentoId = new SelectList(lista, "Id", "Name", tipoDeAtendimento);
         }
     }
 }

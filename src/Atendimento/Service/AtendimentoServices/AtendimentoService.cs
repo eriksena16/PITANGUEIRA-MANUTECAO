@@ -13,19 +13,26 @@ namespace Pitangueira.Service.AtendimentoServices
     {
         private readonly PitangaDbContext _context;
         private readonly IClienteService _cliente;
+        private readonly IUsuarioService _usuario;
 
-        public AtendimentoService(PitangaDbContext context, IClienteService cliente)
+        public AtendimentoService(PitangaDbContext context, IClienteService cliente, IUsuarioService usuario)
         {
             _context = context;
             _cliente = cliente;
+            _usuario = usuario;
         }
 
         public async Task<Atendimento_> Create(Atendimento_ obj)
         {
             try
             {
-                obj.UsuarioId = 1;
-                obj.TipoAtendimentoId = 1;
+                obj.DataExecucao = DateTime.Today;
+
+                if (obj.TipoAtendimento.Name == null)
+                {
+                    obj.TipoAtendimento = null;
+                }
+
                 _context.Add(obj);
 
                 await _context.SaveChangesAsync();
@@ -79,6 +86,7 @@ namespace Pitangueira.Service.AtendimentoServices
                 Atendimento_ atendimento = await _context.Atendimento
                     .Include(c => c.Usuario)
                     .Include(c => c.Cliente)
+                    .Include(c=> c.TipoAtendimento)
                     .FirstOrDefaultAsync(a => a.Id == id);
 
                 return atendimento;
@@ -103,6 +111,7 @@ namespace Pitangueira.Service.AtendimentoServices
                 List<Atendimento_> atendimentos = _context.Atendimento
                 .Include(c => c.Cliente)
                 .Include(c => c.Usuario)
+                .Include(c => c.TipoAtendimento)
                 .OrderBy(c => c.DataExecucao)
                 .ToList();
 
@@ -155,6 +164,18 @@ namespace Pitangueira.Service.AtendimentoServices
             var clienteQuery = _cliente.GetAll();
 
             return clienteQuery;
+        }
+        public List<TipoAtendimento> DropdownListTipoDeAtendimento()
+        {
+            var tipoatendiemntoQuery = _context.TipoAtendimento.ToList();
+
+            return tipoatendiemntoQuery;
+        }
+        public List<Usuario> GetUsuario()
+        {
+            var usuarios = _usuario.GetAll();
+
+            return usuarios;
         }
     }
 }

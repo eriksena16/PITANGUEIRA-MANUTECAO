@@ -37,12 +37,18 @@ namespace WebApp.Controllers
 
 
                 var usuario = await this.GatewayServiceProvider.Get<IUsuarioService>().Create(usuarioDTQ);
+
+               
+                
+
+                TempData["Mensagem"] = "Cadastro realizado com sucesso. Efetue login.";
             }
 
-            return RedirectToAction("Index", "Home");
+            
+
+            return RedirectToAction("Login");
 
         }
-
 
         public ActionResult Login(string ReturnUrl)
         {
@@ -64,14 +70,14 @@ namespace WebApp.Controllers
 
                 if (usuario == null)
                 {
-                    ModelState.AddModelError("Login", "Login incorreto!");
+                    ModelState.AddModelError("Username", "Login incorreto!");
 
                     return View(login);
                 }
 
                 if (usuario.Senha != Hash.GerarHash(login.Senha))
                 {
-                    ModelState.AddModelError("Login", "Senha incorreta!");
+                    ModelState.AddModelError("Senha", "Senha incorreta!");
 
                     return View(login);
                 }
@@ -100,6 +106,12 @@ namespace WebApp.Controllers
 
         }
 
+        
+        public ActionResult Logout()
+        {
+             HttpContext.SignOutAsync();
 
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

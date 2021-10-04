@@ -15,16 +15,22 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="DataExecucao" class="control-label"></label>
-                        <input asp-for="DataExecucao" class="form-control" />
+                        <input asp-for="DataExecucao" class="form-control" value="@DateTime.Today" disabled />
                         <span asp-validation-for="DataExecucao" class="text-danger"></span>
                     </div>
-                    @*<div class="form-group">
+                    <div><p class="control-label">Adicione um novo tipo ou selecione um existente</p></div>
+                    <div class="form-group">
+                        <label class="control-label">Novo tipo de atendimento</label>
+                        <input asp-for="TipoAtendimento.Name" class="form-control" />
+                        <span asp-validation-for="TipoAtendimento.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="TipoAtendimentoId" class="control-label"></label>
                         <select asp-for="TipoAtendimentoId" class="form-control" asp-items="ViewBag.TipoAtendimentoId">
-                            <option value="">-- Selecione o Tipo de atendimento --</option>
+                            <option value="">-- Selecione o Tipo --</option>
                         </select>
                         <span asp-validation-for="TipoAtendimentoId" class="text-danger"></span>
-                    </div>*@
+                    </div>
                     <div class="form-group">
                         <label asp-for="ClienteId" class="control-label"></label>
                         <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId">
