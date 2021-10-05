@@ -15,20 +15,10 @@ namespace WebApp.Controllers
     [Authorize]
     public class AtendimentosController : ApplicationController
     {
-        private readonly PitangaDbContext _context;
-
-
-        public AtendimentosController(PitangaDbContext context)
-        {
-            _context = context;
-
-        }
 
         [Authorize]
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
-            
-
             List<Atendimento_> atendimentos = this.GatewayServiceProvider.Get<IAtendimentoService>().GetAll();
 
             return View(atendimentos);
@@ -189,11 +179,11 @@ namespace WebApp.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        
-       
+
+
         private bool AtendimentoExists(long id)
         {
-            return _context.Atendimento.Any(e => e.Id == id);
+            return this.GatewayServiceProvider.Get<IAtendimentoService>().Exists(id);
         }
 
         private void DropdownListCliente(object listaCliente = null)

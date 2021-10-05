@@ -1,4 +1,6 @@
 ﻿using Pitangueira.Model.Entities;
+using Pitangueira.Model.Entities.Enums;
+using Pitangueira.Model.Entities.Utils;
 using Pitangueira.Repository.AtendimentoRepository;
 using System.Linq;
 
@@ -17,8 +19,12 @@ namespace Repository.AtendimentoRepository
 
             var clientes = new Cliente[]
             {
-                new Cliente{Name ="Erik Sena"},
-                new Cliente{Name ="WTF"}
+                new Cliente{Name ="Tel"},
+                new Cliente{Name ="WTF"},
+                new Cliente{Name ="Siclos"},
+                new Cliente{Name ="Catedra"},
+                new Cliente{Name ="Drummond"}
+
             };
             foreach (var obj in clientes)
             {
@@ -26,17 +32,34 @@ namespace Repository.AtendimentoRepository
             }
             context.SaveChanges();
 
-            //var users = new Usuario[]
-            //{
-            //    new Usuario{Name = "Gestor", UsuarioName ="gestor", Email="gestor@pitanga.com", EmailConfirmed = true, PasswordHash = "Tacanha12@"},
-            //    new Usuario{Name = "Tecnico", UsuarioName ="tecnico", Email="tecnico@pitanga.com", EmailConfirmed = true, PasswordHash = "Tacanha12@"}
-            //};
+            var tipoAtendimentos = new TipoAtendimento[]
+            {
+                new TipoAtendimento{Name ="Manutenção de Computadores"},
+                new TipoAtendimento{Name ="Suporte Pacote Office"},
+                new TipoAtendimento{Name ="Cabeamento de Rede"},
+                new TipoAtendimento{Name ="Implantação de sistema CFTV"},
+                
 
-            //foreach (var obj in users)
-            //{
-            //    context.Usuario.Add(obj);
-            //}
-            //context.SaveChanges();
+            };
+            foreach (var obj in tipoAtendimentos)
+            {
+                context.TipoAtendimento.Add(obj);
+            }
+
+            context.SaveChanges();
+
+
+            var users = new Usuario[]
+            {
+                new Usuario{Nome = "Gestor", UserName ="gestor", TipoUsuario = TipoUsuario.Gestor, Senha = Hash.GerarHash("Pitanga12@")},
+                new Usuario{Nome = "Tecnico", UserName ="tecnico", TipoUsuario = TipoUsuario.Tecnico, Senha = Hash.GerarHash("Pitanga16@") }
+            };
+
+            foreach (var obj in users)
+            {
+                context.Usuario.Add(obj);
+            }
+            context.SaveChanges();
 
 
         }

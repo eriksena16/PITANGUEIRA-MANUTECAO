@@ -2,7 +2,24 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container">
+    <h1 class="text-center font-weight-light my-4">
+        Bem Vindo ao PitangaHelp!
+    </h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header"><h3 class="text-center font-weight-light my-4">Instruções de Login!</h3></div>
+                <div class="card-body">
+                    <p>Para fazer o login temos dois usuarios cadastrados:</p>
+                    <p>Username : tecnico;</p>
+                    <p>Senha : Pitanga16&#64;</p>
+                    <p>Username : gestor;</p>
+                    <p>Senha : Pitanga12&#64;</p>
+                    <p>Clique aqui para fazer o login: <a class="nav-link text-primary" asp-controller="Autenticacao" asp-action="Login">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

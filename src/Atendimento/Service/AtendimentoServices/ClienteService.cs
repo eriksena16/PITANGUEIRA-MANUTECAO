@@ -17,44 +17,10 @@ namespace Pitangueira.Service.AtendimentoServices
             _context = context;
         }
 
-        public async Task<Cliente> Create(Cliente obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Cliente> Delete(long? id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Cliente> DeleteConfirmed(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Cliente> Details(long? id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Exists(long id)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Cliente> GetAll()
         {
-            return _context.Cliente.OrderBy(c=> c.Name).ToList();
+            return _context.Cliente.OrderBy(c => c.Name).ToList();
         }
 
-        public Task<Cliente> GetUpdate(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Cliente> Update(long id, Cliente obj)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

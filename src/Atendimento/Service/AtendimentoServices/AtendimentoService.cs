@@ -98,9 +98,9 @@ namespace Pitangueira.Service.AtendimentoServices
             }
         }
 
-        public async Task<bool> Exists(long id)
+        public bool Exists(long id)
         {
-            return await Task.FromResult(_context.Atendimento.Any(e => e.Id == id));
+            return _context.Atendimento.Any(e => e.Id == id);
         }
 
         public List<Atendimento_> GetAll()
@@ -118,7 +118,7 @@ namespace Pitangueira.Service.AtendimentoServices
 
                 foreach (var obj in atendimentos)
                 {
-
+                    
                 }
 
                 return atendimentos;

@@ -14,7 +14,7 @@ namespace Pitangueira.Contract.AtendimentoContract
         Task<T> Update(long id, T obj);
         Task<T> Delete(long? id);
         Task<T> DeleteConfirmed(long id);
-        Task<bool> Exists(long id);
+        bool Exists(long id);
 
         //Task<TReturn> Create<TReturn>(T obj);
     }

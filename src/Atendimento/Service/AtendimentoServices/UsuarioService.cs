@@ -1,4 +1,5 @@
-﻿using Pitangueira.Contract.AtendimentoContract;
+﻿using Microsoft.EntityFrameworkCore;
+using Pitangueira.Contract.AtendimentoContract;
 using Pitangueira.Model.Entities;
 using Pitangueira.Model.Entities.DTQ;
 using Pitangueira.Model.Entities.Utils;
@@ -57,25 +58,6 @@ namespace Pitangueira.Service.AtendimentoServices
             
         }
 
-        public  Task<Usuario> Delete(long? id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Usuario> DeleteConfirmed(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Usuario> Details(long? id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Exists(long id)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<Usuario> GetAll()
         {
@@ -92,19 +74,9 @@ namespace Pitangueira.Service.AtendimentoServices
             }
         }
 
-        public Task<Usuario> GetUpdate(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Usuario> Update(long id, Usuario obj)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Usuario> Login(Login obj)
         {
-            return  _context.Usuario.FirstOrDefault(c => c.UserName == obj.Username);
+            return  await _context.Usuario.FirstOrDefaultAsync(c => c.UserName == obj.Username);
         }
     }
 }
