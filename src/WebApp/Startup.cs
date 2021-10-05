@@ -35,6 +35,7 @@ namespace WebApp
             services.ConfigureAtendimentoService();
             services.ConfigureGatewayService();
 
+            services.AddRazorPages();
 
             services.AddAuthentication("CookieAuthentication")
                  .AddCookie("CookieAuthentication", config =>
@@ -82,7 +83,7 @@ namespace WebApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Atendimentos}/{action=Create}/{id?}");
-                //endpoints.MapRazorPages();
+                endpoints.MapRazorPages();
             });
         }
     }

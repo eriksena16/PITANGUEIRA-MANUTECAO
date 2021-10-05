@@ -7,11 +7,14 @@
 <h1>Atendimentos realizados</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Novo Atendimento</a>
 </p>
-<table class="table table-bordered table-hover" id="dataTable"  width="100%" cellspacing="0">
+<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
     <thead class="thead-dark">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataExecucao)
             </th>
@@ -27,13 +30,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Observacao)
             </th>
-            <th></th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr class="table-light">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DataExecucao)
                 </td>
@@ -49,11 +55,21 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Observacao)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
+                @if (User.IsInRole("Gestor"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> 
+                    </td>
+                }
+
             </tr>
         }
     </tbody>

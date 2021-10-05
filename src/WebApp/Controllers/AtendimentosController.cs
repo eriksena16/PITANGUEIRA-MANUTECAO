@@ -24,13 +24,16 @@ namespace WebApp.Controllers
 
         }
 
-
+        [Authorize]
         public async Task<IActionResult> Index()
         {
+            
+
             List<Atendimento_> atendimentos = this.GatewayServiceProvider.Get<IAtendimentoService>().GetAll();
 
             return View(atendimentos);
         }
+
 
         public async Task<IActionResult> Details(long? id)
         {
@@ -54,6 +57,7 @@ namespace WebApp.Controllers
 
             DropdownListCliente();
             DropdownListTipoDeAtendimento();
+            DropdownListUsuario();
             return View();
         }
 
@@ -64,18 +68,20 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userName = User.Identity.Name;
-
-                var usuarios = this.GatewayServiceProvider.Get<IAtendimentoService>().GetUsuario();
-
-                foreach (var obj in usuarios)
+                if (User.IsInRole("Tecnico"))
                 {
-                    if (userName == obj.UserName)
+                    var userName = User.Identity.Name;
+
+                    var usuarios = this.GatewayServiceProvider.Get<IAtendimentoService>().GetUsuario();
+
+                    foreach (var obj in usuarios)
                     {
-                        atendimento.UsuarioId = obj.Id;
+                        if (userName == obj.UserName)
+                        {
+                            atendimento.UsuarioId = obj.Id;
+                        }
                     }
                 }
-
                
 
                 atendimento = await this.GatewayServiceProvider.Get<IAtendimentoService>().Create(atendimento);
@@ -84,15 +90,22 @@ namespace WebApp.Controllers
             }
             DropdownListCliente(atendimento.ClienteId);
             DropdownListTipoDeAtendimento(atendimento.TipoAtendimentoId);
-            //ViewData["UsuarioId"] = new SelectList(_context.Tecnico, "Id", "Id", atendimento.UsuarioId);
+            DropdownListUsuario(atendimento.UsuarioId);
+            
             return View(atendimento);
         }
-
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
             {
                 return NotFound();
+            }
+
+            if (User.IsInRole("Tecnico"))
+            {
+                ViewBag.Mensagem = "Usuario com perfil de Tecnico não pode realizar Alterações";
+
             }
 
             var atendimento = await this.GatewayServiceProvider.Get<IAtendimentoService>().GetUpdate(id.Value);
@@ -103,11 +116,11 @@ namespace WebApp.Controllers
             }
             DropdownListCliente(atendimento.ClienteId);
             DropdownListTipoDeAtendimento(atendimento.TipoAtendimentoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", atendimento.UsuarioId);
+            DropdownListUsuario(atendimento.UsuarioId);
             return View(atendimento);
         }
 
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, Atendimento_ atendimento)
@@ -134,14 +147,17 @@ namespace WebApp.Controllers
                         throw;
                     }
                 }
+                
                 return RedirectToAction(nameof(Index));
             }
+            
             DropdownListCliente(atendimento.ClienteId);
             DropdownListTipoDeAtendimento(atendimento.TipoAtendimentoId);
-            //ViewData["UsuarioId"] = this.Usuario.FindFirstValue(ClaimTypes.NameIdentifier);
+            DropdownListUsuario(atendimento.UsuarioId);
             return View(atendimento);
         }
 
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -156,6 +172,12 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
+            if (User.IsInRole("Tecnico"))
+            {
+                ViewBag.Mensagem = "Usuario com perfil de Tecnico não apagar registros da tela de atendimento";
+
+            }
+
             return View(atendimento);
         }
 
@@ -167,7 +189,8 @@ namespace WebApp.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
+        
+       
         private bool AtendimentoExists(long id)
         {
             return _context.Atendimento.Any(e => e.Id == id);
@@ -185,6 +208,13 @@ namespace WebApp.Controllers
             var lista = this.GatewayServiceProvider.Get<IAtendimentoService>().DropdownListTipoDeAtendimento();
 
             ViewBag.TipoAtendimentoId = new SelectList(lista, "Id", "Name", tipoDeAtendimento);
+        }
+
+        private void DropdownListUsuario(object listaUsuario = null)
+        {
+            var lista = this.GatewayServiceProvider.Get<IAtendimentoService>().GetUsuario();
+
+            ViewBag.UsuarioId = new SelectList(lista, "Id", "Nome", listaUsuario);
         }
     }
 }

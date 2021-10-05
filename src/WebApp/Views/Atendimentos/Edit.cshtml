@@ -1,47 +1,68 @@
 ﻿@model Pitangueira.Model.Entities.Atendimento_
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
+<div class="container">
+    @if (ViewBag.Mensagem != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Mensagem
+        </div>
+    }
+</div>
 
-<h4>Atendimento</h4>
+<h4 class="mt-4"> Editar Atendimento</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DataExecucao" class="control-label"></label>
-                <input asp-for="DataExecucao" class="form-control" />
-                <span asp-validation-for="DataExecucao" class="text-danger"></span>
+
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header"><h3 class="text-center font-weight-light my-4">Atualizar</h3></div>
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="DataExecucao" class="control-label"></label>
+                            <input asp-for="DataExecucao" class="form-control" />
+                            <span asp-validation-for="DataExecucao" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TipoAtendimentoId" class="control-label"></label>
+                            <select asp-for="TipoAtendimentoId" class="form-control" asp-items="ViewBag.TipoAtendimentoId">
+                                <option value="">-- Selecione o Tipo --</option>
+                            </select>
+                            <span asp-validation-for="TipoAtendimentoId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ClienteId" class="control-label"></label>
+                            <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId">
+                                <option value="">-- Selecione o Cliente --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UsuarioId" class="control-label"></label>
+                            <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId">
+                                <option value="">-- Selecione o Usuario --</option>
+                            </select>
+                        </div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <input type="submit" value="Atualizar" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="TipoAtendimentoId" class="control-label"></label>
-                <select asp-for="TipoAtendimentoId" class="form-control"></select>
-                <span asp-validation-for="TipoAtendimentoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClienteId" class="control-label"></label>
-                <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
-                <span asp-validation-for="ClienteId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="UsuarioId" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {

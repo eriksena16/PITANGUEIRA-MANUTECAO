@@ -26,7 +26,6 @@ namespace Pitangueira.Service.AtendimentoServices
         {
             try
             {
-                obj.DataExecucao = DateTime.Today;
 
                 if (obj.TipoAtendimento.Name == null)
                 {
@@ -108,12 +107,18 @@ namespace Pitangueira.Service.AtendimentoServices
 
             try
             {
+                
                 List<Atendimento_> atendimentos = _context.Atendimento
                 .Include(c => c.Cliente)
                 .Include(c => c.Usuario)
                 .Include(c => c.TipoAtendimento)
                 .OrderBy(c => c.DataExecucao)
                 .ToList();
+
+                foreach (var obj in atendimentos)
+                {
+
+                }
 
                 return atendimentos;
             }

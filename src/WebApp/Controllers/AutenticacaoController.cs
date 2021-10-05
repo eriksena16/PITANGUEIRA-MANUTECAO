@@ -87,7 +87,9 @@ namespace WebApp.Controllers
                     {
                         new Claim(ClaimTypes.Name, usuario.UserName),
                         new Claim("Login", usuario.Senha),
-                    };
+                        new Claim(ClaimTypes.Role, usuario.TipoUsuario.ToString()),
+                       
+                    } ;
 
                 ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "Login");
 
