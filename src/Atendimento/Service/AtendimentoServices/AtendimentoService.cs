@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Pitangueira.Model.Entities.Enums;
 
 namespace Pitangueira.Service.AtendimentoServices
 {
@@ -146,7 +147,7 @@ namespace Pitangueira.Service.AtendimentoServices
             }
         }
 
-        public new async Task<Atendimento_> Update(long id, Atendimento_ obj)
+        public async Task<Atendimento_> Update(long id, Atendimento_ obj)
         {
 
 
@@ -178,7 +179,7 @@ namespace Pitangueira.Service.AtendimentoServices
         }
         public List<Usuario> GetUsuario()
         {
-            var usuarios = _usuario.GetAll();
+            var usuarios = _usuario.GetAll().Where(c=> c.TipoUsuario == TipoUsuario.Tecnico).ToList();
 
             return usuarios;
         }
