@@ -96,6 +96,7 @@ namespace WebApp.Controllers
             {
                 ViewBag.Mensagem = "Usuario com perfil de Tecnico não pode realizar Alterações";
 
+                return RedirectToAction("Login");
             }
 
             var atendimento = await this.GatewayServiceProvider.Get<IAtendimentoService>().GetUpdate(id.Value);

@@ -27,15 +27,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Atendimento</a>
                         <div class="dropdown-menu">
-                            @if (User.IsInRole("Gestor"))
-                            {
-                                <a class="dropdown-item" asp-area="" asp-controller="Atendimentos" asp-action="Index">Relatório</a>
-                            }
-
+                            <a class="dropdown-item" asp-area="" asp-controller="Atendimentos" asp-action="Index">Relatório</a>
                             <a class="dropdown-item" asp-area="" asp-controller="Atendimentos" asp-action="Create">Novo Atendimento</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
                         </div>
                     </li>
                 </ul>
