@@ -53,7 +53,7 @@ namespace Pitangueira.Service.AtendimentoServices
         public bool HasUsuario( UsuarioSalvarQuery obj)
         {
             
-          return _context.Usuario.Count(u => u.UserName == obj.Username) > 0;
+          return _context.Usuario.Any(u => u.UserName == obj.Username);
             
         }
 
